@@ -8,7 +8,16 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <title>Authentication App</title>
+    <title>Weather Lookup</title>
+
+    <style>
+      .good {background-color: #0C0;}
+      .moderate {background-color: #FFFF00;}
+      .USG {background-color: #FF9900;}
+      .unhealthy {background-color: #FF0000;}
+      .veryunhealthy {background-color: #990066;}
+      .hazardous {background-color: #660000;}
+    </style>
 
   </head>
   <body>
@@ -20,32 +29,11 @@
 	  </button>
 	
 	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-	    <ul class="navbar-nav ml-auto">
-        {% if user.is_authenticated %}
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'edit_profile' %}">Edit profile</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'change_password' %}">Change password</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-          </li>
-        {% else %}  
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'lookup' %}">WxLookup</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'todo_list' %}">ToDoList</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'login' %}">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'register' %}">Register</a>
-          </li>
-        {% endif %}
-	    </ul>
+      <form action="{% url 'lookup' %}"" class="form-inline my-2 my-lg-0" method="POST">
+        {% csrf_token %}
+        <input class="form-control mr-sm-2" type="search" placeholder="Enter zipcode" aria-label="Search" name="zipcode">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Lookup</button>
+      </form>
 	  </div>
 	</nav>
   

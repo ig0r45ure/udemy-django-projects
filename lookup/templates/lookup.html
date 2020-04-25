@@ -1,8 +1,32 @@
-{% extends 'base.html' %}
+{% extends 'lookup_base.html' %}
 
 {% block content %}
 
-	<h1>This is the home page</h1>
+	{% if api %}
+
+		{% if api == "Error" %}
+			
+            There was an error... please try again.
+
+		{% else %}
+
+			<div class="jumbotron {{ category_color }}">
+			  	<h1 class="display-4">{{ api.0.Category.Name }}</h1>
+			  	<p class="lead">{{ api.0.ReportingArea }} Current Air Quality Index: {{ api.0.AQI }}</p>
+			  	<hr class="my-4">
+			  	<p>Air Quality Index Scale</p> 
+				<p>  0 - 50 Good</p> 
+				<p> 51 - 100 Moderate</p> 
+				<p>101 - 150 Unhealthy for Sensitive Groups (USG)</p> 
+				<p>151 - 200 Unhealthy</p>
+				<p>201 - 300 Very Unhealthy</p> 
+				<p>301 - 500 Hazardous</p>
+				<p>Values above 500 are beyond the AQI scale.</p>
+			</div>
+
+		{% endif %}
+
+	{% endif %}
 
 {% endblock %}
 
